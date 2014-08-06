@@ -1,0 +1,11 @@
+{
+  "name": "vanilla-slab-text",
+  "version": "1.0.0",
+  "description": "A heavily modified port of the excellent jQuery Slabtext plugin, without jQuery.",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Ball <nick@npbee.me> (http://npbee.me/)",
+  "license": "ISC"
+}
