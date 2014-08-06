@@ -12,7 +12,7 @@ function vanillaSlab(options) {
     selector: options.selector || '.headline',
     maxFontSize: options.maxFontSize || 2000,
     minWordsPerLine: options.minWordsPerLine || 5,
-    buffer: options.buffer || 15
+    buffer: options.buffer || 10
   };
 
    if (!document.querySelector(settings.selector)) {
@@ -101,15 +101,14 @@ function vanillaSlab(options) {
 
        // Check after setting the font
        var diff = parent_width - span.offsetWidth > 0 ? true : false;
-       console.log(parent_width, span.innerHTML.split(" "));
 
-       if (diff) {
-         if (word_spacing) {
-           span.style.wordSpacing = (parent_width - span.offsetWidth) / ( (strings[s].split(" ").length - 1).toPrecision(3) );
-         } else {
-           span.style.letterSpacing = (parent_width - span.offsetWidth) / ( (span.innerHTML.split("").length).toPrecision(3) );
-         }
-       }
+       //if (diff) {
+         //if (word_spacing) {
+           //span.style.wordSpacing = (parent_width - span.offsetWidth) / ( (strings[s].split(" ").length - 1).toPrecision(3) );
+         //} else {
+           //span.style.letterSpacing = (parent_width - span.offsetWidth) / ( (span.innerHTML.split("").length).toPrecision(3) );
+         //}
+       //}
      }
 
       
