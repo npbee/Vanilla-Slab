@@ -15,8 +15,7 @@ function vanillaSlab(options) {
   };
 
    if (!document.querySelector(settings.selector)) {
-     throw new Error("Element with class of '" + settings.selector + "' not found on page.");
-     return;
+     throw new Error('Element with class of "' + settings.selector + '" not found on page.');
   }
 
   var target = document.querySelector(settings.selector);
@@ -92,7 +91,7 @@ function vanillaSlab(options) {
        var string_width = get_item_width(strings[s], original_font_size);
        var ratio = (parent_width - buffer) / string_width ;
        var span = document.createElement('span');
-       var word_spacing = strings[s].split(" ").length > 1;
+       var word_spacing = strings[s].split(' ').length > 1;
 
        span.innerHTML = strings[s];
        span.style.fontSize = original_font_size * ratio;
@@ -111,7 +110,7 @@ function vanillaSlab(options) {
      }
 
       
-  };
+  }
    
   slabify();  
   debounce('resize', slabify, 300 );

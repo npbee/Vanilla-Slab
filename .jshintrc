@@ -1,0 +1,27 @@
+{
+    "bitwise": true,
+    "browser": true,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": true,
+    "laxbreak": true,
+    "newcap": true,
+    "node": true,
+    "noarg": true,
+    "noempty": true,
+    "predef": [
+        "requirejs",
+        "define",
+        "require",
+        "Modernizr",
+        "confirm"
+    ],
+    "quotmark": "single",
+    "smarttabs": true,
+    "strict": false,
+    "trailing": true,
+    "undef": true
+}

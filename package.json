@@ -7,5 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nick Ball <nick@npbee.me> (http://npbee.me/)",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-browserify": "^0.5.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-jshint": "^1.8.4",
+    "jshint-stylish": "^0.4.0",
+    "chai": "^1.9.1",
+    "mocha": "^1.21.3",
+    "gulp-mocha": "^0.5.2"
+  }
 }
