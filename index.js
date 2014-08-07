@@ -8,7 +8,7 @@ var debounce = require('./utils/debounce');
 var vanillaSlab = {};
 
 vanillaSlab.init = function(options) {
-
+  var options = options || {};
   this.settings = {
     selector: options.selector || '.headline',
     maxFontSize: options.maxFontSize || 2000,
@@ -23,7 +23,9 @@ vanillaSlab.init = function(options) {
     throw new Error('Element with class of "' + this.settings.selector + '" not found on page.');
   }
 
-  var target = this.target = document.querySelector(this.settings.selector);
+  var target = document.querySelector(this.settings.selector);
+  this.target = target;
+  
   var words;
 
   // We only need to run this function once
@@ -66,6 +68,7 @@ vanillaSlab.slabify = function() {
   var parent_width = parent.offsetWidth;  
   var buffer = Math.min( parent_width / settings.buffer);
 
+
   // Set the display style to 'inline' so that we can get a proper width calc
   target.style.display = 'inline';
   var target_width = target.offsetWidth;
@@ -79,7 +82,9 @@ vanillaSlab.slabify = function() {
   // total width of the target container
   var strings = [];
   var string = '';
-  var chars_per_line = Math.min(60, Math.floor(parent_width / (original_font_size * settings.fontRatio)));
+  var chars_per_line = Math.min(60, Math.floor(parent_width / (original_font_size * settings.fontRatio))) || 20;
+
+  this.chars_per_line = chars_per_line;
 
   for (var w = 0; w < words.length; w++) {
     var string_word_count = string.split(' ').length;
@@ -153,6 +158,8 @@ vanillaSlab.slabify = function() {
     }
 
   }
+
+  this.spans = strings;
 
   // Remove the original content
   target.innerHTML = '';
