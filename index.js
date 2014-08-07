@@ -7,8 +7,8 @@ var debounce = require('./utils/debounce');
 ****/
 var vanillaSlab = {};
 
-vanillaSlab.init = function(options) {
-  var options = options || {};
+vanillaSlab.init = function(_options) {
+  var options = _options || {};
   this.settings = {
     selector: options.selector || '.headline',
     maxFontSize: options.maxFontSize || 2000,
@@ -57,6 +57,21 @@ vanillaSlab.get_item_width = function(item, font_size) {
     return width;
 };
 
+/****
+ * Verifies that a string passes the plugin's defined parameters
+ * @param {string} string
+ * @return {boolean}
+****/
+vanillaSlab.verifyString = function(string) {
+  var string_word_count = string.trim().split(' ').length;
+  var string_char_count = string.length;
+  
+  return string_word_count >= this.settings.minWordsPerLine &&
+         string_word_count < this.settings.maxWordsPerLine &&
+         string_char_count <= this.chars_per_line;
+};
+
+
 
 // The main jam
 vanillaSlab.slabify = function() {
@@ -82,17 +97,17 @@ vanillaSlab.slabify = function() {
   // total width of the target container
   var strings = [];
   var string = '';
-  var chars_per_line = Math.min(60, Math.floor(parent_width / (original_font_size * settings.fontRatio))) || 20;
-
-  this.chars_per_line = chars_per_line;
+  var chars_per_line = this.chars_per_line = Math.min(60, Math.floor(parent_width / (original_font_size * settings.fontRatio))) || 20;
 
   for (var w = 0; w < words.length; w++) {
     var string_word_count = string.split(' ').length;
     var last_elem = w === words.length - 1;
 
-
+    // the working string is current string + the next word in the words array
+    var working_string = string += words[w] + ' ';
+    console.log(working_string + ' :: ' + vanillaSlab.verifyString(working_string));
     // Test if the string is greater than the max allowed words per line
-    if (!last_elem && string_word_count > settings.maxWordsPerLine) {
+    /*if (!last_elem && string_word_count > settings.maxWordsPerLine) {
       strings.push(string);
       string = '' + words[w] + ' ';
     } else if (string_word_count > settings.maxWordsPerLine) {
@@ -155,7 +170,7 @@ vanillaSlab.slabify = function() {
           string += words[w] + ' ';
         }
       }
-    }
+    }*/
 
   }
 

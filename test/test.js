@@ -27,6 +27,11 @@ describe('Plugin initialization without options', function() {
     (vanillaSlab.settings.buffer).should.equal(10);
     (vanillaSlab.settings.fontRatio).should.equal(0.78);
   });
+
+  after(function(done) {
+    console.log(vanillaSlab);
+    done();
+  });
 });
 
 describe('Plugin initialization with options', function() {
@@ -74,7 +79,7 @@ describe('The words in the headline', function() {
 });
 
 
-describe("the spans elements that the plugin creates", function() {
+describe("the span elements that the plugin creates", function() {
   before(function(done) {
     headline.innerHTML = 'This is a giant humungous extra large headline';
     headline.className = 'headline';
@@ -84,10 +89,9 @@ describe("the spans elements that the plugin creates", function() {
 
   context('when the parent width is 900px wide', function() {
 
-    it('should create the correct span elements', function() {
+    it('should be correct', function() {
       // In this case, the chars per line will be 20 because we're not actually
       // rendering an element so we have no way of getting the width.
-      
       (vanillaSlab.spans[0]).should.equal('This is a giant ');
     });
   });
