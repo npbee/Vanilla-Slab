@@ -67,6 +67,7 @@ function vanillaSlab(options) {
      var strings = [];
      var string = '';
      var chars_per_line = Math.min(60, Math.floor(parent_width / (original_font_size * settings.fontRatio)));
+     console.log("chars per line: ", chars_per_line);
 
      for (var w = 0; w < words.length; w++) {
        var string_word_count = string.split(' ').length;
@@ -87,7 +88,6 @@ function vanillaSlab(options) {
          // per line based on the settings.  If not, add the word to the string.
          if (!last_elem && string_word_count <= settings.minWordsPerLine) {
            string += words[w] + ' ';
-           console.log('String word count is less than the minimum words per line: ', string);
          } 
 
          // Last element of the loop and string is less than min words per line
@@ -102,7 +102,6 @@ function vanillaSlab(options) {
            // string is less than the chars per line.  If not,
            // push the string to the strings array.
            if (!last_elem && string.length <= chars_per_line) {
-             console.log('String character count is less than the chars per line: ', string);
              string += words[w] + ' ';
            } 
 
@@ -129,7 +128,6 @@ function vanillaSlab(options) {
            // We're not on the last element of the loop and string length is
            // greater than the chars per line
            else {
-             console.log('Not the last element and string is greater than chars per line: ', string);
              // Push the current string
              strings.push(string);
 
@@ -147,8 +145,10 @@ function vanillaSlab(options) {
      // Remove the original content
      target.innerHTML = '';
      
-     console.log(strings);
+
      for (var s = 0; s < strings.length; s++) {
+       console.log(strings[s], 'length: ' + strings[s].length);
+       
        var string_width = get_item_width(strings[s], original_font_size);
        var ratio = (parent_width - buffer) / string_width ;
        var span = document.createElement('span');
