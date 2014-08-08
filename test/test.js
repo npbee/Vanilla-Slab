@@ -1,7 +1,7 @@
 var chai = require('chai');
 var should = require('should');
 var jsdom = require('jsdom');
-var vanillaSlab = require('../');
+var vanillaSlab = require('../lib/vanilla-slab');
 
 // Creating a fake dom to test with
 global.window = jsdom.jsdom().createWindow();

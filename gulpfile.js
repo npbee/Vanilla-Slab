@@ -6,16 +6,16 @@ var stylish = require('jshint-stylish');
 var mocha = require('gulp-mocha');
 
 gulp.task('scripts', function() {
-  gulp.src('index.js')
+  gulp.src('./lib/vanilla-slab.js')
   .pipe(browserify({
     standalone: 'vanillaSlab'
   }))
-  .pipe(rename('vanilla-slab-text.js'))
+  .pipe(rename('vanilla-slab.build.js'))
   .pipe(gulp.dest('./build'));
 });
 
 gulp.task('lint', function() {
-  return gulp.src('./index.js')
+  return gulp.src('./lib/vanilla-slab.js')
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
