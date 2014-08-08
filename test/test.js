@@ -29,7 +29,6 @@ describe('Plugin initialization without options', function() {
   });
 
   after(function(done) {
-    console.log(vanillaSlab);
     done();
   });
 });
@@ -81,18 +80,27 @@ describe('The words in the headline', function() {
 
 describe("the span elements that the plugin creates", function() {
   before(function(done) {
-    headline.innerHTML = 'This is a giant humungous extra large headline';
+    headline.innerHTML = 'This is a giant humongous extra large headline';
     headline.className = 'headline';
     vanillaSlab.init();
     done();
   });
 
-  context('when the parent width is 900px wide', function() {
 
-    it('should be correct', function() {
-      // In this case, the chars per line will be 20 because we're not actually
-      // rendering an element so we have no way of getting the width.
-      (vanillaSlab.spans[0]).should.equal('This is a giant ');
-    });
+  it('should be correct', function() {
+    // In this case, the chars per line will be 20 because we're not actually
+    // rendering an element so we have no way of getting the width. The
+    // fallback in this case is 20 chars per line.  So all parameters would
+    // be:
+    // max words per line = 5
+    // min words per line = 2
+    // max chars per line = 20
+    // Spans should be:
+    // 0: This is a giant
+    // 1: humongous extra 
+    // 2: large headline
+    (vanillaSlab.spans[0]).should.equal('This is a giant ');
+    (vanillaSlab.spans[1]).should.equal('humongous extra ');
+    (vanillaSlab.spans[2]).should.equal('large headline');
   });
 });

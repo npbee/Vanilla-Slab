@@ -38,7 +38,7 @@ vanillaSlab.init = function(_options) {
   
   this.slabify();
 
-  debounce('resize', vanillaSlab.slabify, 300, true);
+  debounce('resize', vanillaSlab.slabify, 300, true, vanillaSlab);
 };
 
 vanillaSlab.get_item_width = function(item, font_size) {
@@ -65,6 +65,10 @@ vanillaSlab.get_item_width = function(item, font_size) {
 vanillaSlab.verifyString = function(string) {
   var string_word_count = string.trim().split(' ').length;
   var string_char_count = string.length;
+  //console.log(string_word_count >= this.settings.minWordsPerLine &&
+              //string_word_count < this.settings.maxWordsPerLine &&
+              //string_char_count <= this.chars_per_line);
+  
   
   return string_word_count >= this.settings.minWordsPerLine &&
          string_word_count < this.settings.maxWordsPerLine &&
@@ -82,8 +86,8 @@ vanillaSlab.slabify = function() {
   var parent = target.parentNode;
   var parent_width = parent.offsetWidth;  
   var buffer = Math.min( parent_width / settings.buffer);
-
-
+  
+  
   // Set the display style to 'inline' so that we can get a proper width calc
   target.style.display = 'inline';
   var target_width = target.offsetWidth;
@@ -93,95 +97,68 @@ vanillaSlab.slabify = function() {
       .getPropertyValue('font-size') || 
       target.currentStyle.fontSize, 10);
 
+
   // Get the width of each word and then the ratio of each word to the 
   // total width of the target container
   var strings = [];
-  var string = '';
-  var chars_per_line = this.chars_per_line = Math.min(60, Math.floor(parent_width / (original_font_size * settings.fontRatio))) || 20;
-
+  this.spans = strings;
+  
+  var current_string = '';
+  var working_string = '';
+  var chars_per_line = Math.min(60, Math.floor(parent_width / (original_font_size * settings.fontRatio))) || 20;
+  this.chars_per_line = chars_per_line;
+  
   for (var w = 0; w < words.length; w++) {
-    var string_word_count = string.split(' ').length;
     var last_elem = w === words.length - 1;
 
     // the working string is current string + the next word in the words array
-    var working_string = string += words[w] + ' ';
-    console.log(working_string + ' :: ' + vanillaSlab.verifyString(working_string));
-    // Test if the string is greater than the max allowed words per line
-    /*if (!last_elem && string_word_count > settings.maxWordsPerLine) {
-      strings.push(string);
-      string = '' + words[w] + ' ';
-    } else if (string_word_count > settings.maxWordsPerLine) {
-      string += words[w];
-      strings.push(string);
+    working_string = current_string + words[w] + ' ';
+    
+    // Verify both the working string and the current string
+    var a = vanillaSlab.verifyString(current_string);
+    var b = vanillaSlab.verifyString(working_string);
+    
+    // If neither strings pass, then we need to continue building up the
+    // current_string
+    if (!a && !b) {
+      //console.log(current_string, ': did not pass');
+      current_string = working_string;
     }
 
-    else {
-      // First test if the string is greater than the minimum number of words
-      // per line based on the settings.  If not, add the word to the string.
-      if (!last_elem && string_word_count <= settings.minWordsPerLine) {
-        string += words[w] + ' ';
-      } 
+    // If a does not pass and b does pass, then build up the current string
+    else if(!a && b) {
+      current_string = working_string;
+    }
 
-      // Last element of the loop and string is less than min words per line
-      // Add the current string and current word to the last element of the
-      // strings array
-      else if (last_elem && string_word_count <= settings.minWordsPerLine) {
-        strings[strings.length - 1] += (string + words[w]);
-      }
-      else {
+    // If both a and b pass, build up the working string
+    else if (a && b) {
+      current_string = working_string;
+    }
 
-        // If we're not on the last elment of the array, then check if the 
-        // string is less than the chars per line.  If not,
-        // push the string to the strings array.
-        if (!last_elem && string.length <= chars_per_line) {
-          string += words[w] + ' ';
-        } 
-
-        // Last element of array and current string is greater than chars per
-        // line
-        else if (last_elem && string.length > chars_per_line){
-          // push the current string
-          strings.push(string);
-
-          // reset the string and append the current word
-          string = '' + words[w] + ' ';
-
-          // Since it's the last word, push it to the strings array
-          strings.push(string);
-        } 
-
-        // Last element and current string is less than chars per line
-        else if (last_elem && string.length <= chars_per_line) {
-          // Append the string to the word
-          string += words[w];
-          strings.push(string);
-        } 
-
-        // We're not on the last element of the loop and string length is
-        // greater than the chars per line
-        else {
-          // Push the current string
-          strings.push(string);
-
-          // Reset the string
-          string = '';
-
-          // Add the current word to the string
-          string += words[w] + ' ';
-        }
-      }
-    }*/
+    // If the current string passes the tests AND the working string does not,
+    // then that means the current string is at the optimum length and should be
+    // inserted as a span
+    else if (a && !b) {
+      // Push the current string do the array
+      strings.push(current_string);
+      // Reset the string
+      current_string = '' + words[w] + ' ';
+    }
+    
+    // If we're on the last item of the loop and the working string does not
+    // pass, then we need to add in the last word to the last span of the array
+    if (last_elem) {
+      strings.push(working_string.trim());
+    }
+    //console.log(working_string + ' :: ' + vanillaSlab.verifyString(working_string));
 
   }
 
-  this.spans = strings;
 
   // Remove the original content
   target.innerHTML = '';
-
-
+  
   for (var s = 0; s < strings.length; s++) {
-
     var string_width = vanillaSlab.get_item_width(strings[s], original_font_size);
     var ratio = (parent_width - buffer) / string_width ;
     var span = document.createElement('span');

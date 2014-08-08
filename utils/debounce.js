@@ -1,5 +1,4 @@
-function debounce(listener, func, threshold, raf) {
-
+function debounce(listener, func, threshold, raf, context) {
   // With request animation frame
   // Per http://www.html5rocks.com/en/tutorials/speed/animations/
   function rafDebounce() {
@@ -20,7 +19,7 @@ function debounce(listener, func, threshold, raf) {
 
     function update() {
       ticking = false;
-      func();
+      func.apply(context);
     }
 
   }
@@ -29,7 +28,6 @@ function debounce(listener, func, threshold, raf) {
   // Without request animation frame
   function otherDebounce() {
     var timeout;
-
     window.addEventListener(listener, function() {
 
       if ( timeout ) {
@@ -41,15 +39,15 @@ function debounce(listener, func, threshold, raf) {
     }, false);
 
     function debounced() {
-      func();
+      func.apply(context);
     }
   }
 
   // Give the option to use request animation frame
   if ( raf ) {
-    rafDebounce();
+    return rafDebounce();
   } else {
-    otherDebounce();
+    return otherDebounce();
   }
 
 
