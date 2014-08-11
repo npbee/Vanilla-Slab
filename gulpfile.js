@@ -6,9 +6,9 @@ var stylish = require('jshint-stylish');
 var mocha = require('gulp-mocha');
 
 gulp.task('scripts', function() {
-  gulp.src('./lib/vanilla-slab.js')
+  gulp.src('./lib/index.js')
   .pipe(browserify({
-    standalone: 'vanillaSlab'
+    standalone: 'VanillaSlab'
   }))
   .pipe(rename('vanilla-slab.build.js'))
   .pipe(gulp.dest('./build'));
