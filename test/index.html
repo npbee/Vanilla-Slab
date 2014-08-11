@@ -3,10 +3,11 @@
     <title>Non-jQuery Slabtext</title>
     <style>
       body { 
-        font-family: 'Helvetica';
+        font-family: 'Ubuntu';
         font-weight: 600;
         max-width: 900px;
         margin: 0 auto;
+        background: #f9f9f9;
       }
     </style>
     </head>
@@ -17,11 +18,14 @@
     
     <script src="../build/vanilla-slab.build.js"></script>
     <script>
+      
+      // Main initialization
       document.addEventListener('DOMContentLoaded', function() {
           vanillaSlab.init({
             maxWordsPerLine: 4
           });
       });
+
     </script>
   </body>
 </html>

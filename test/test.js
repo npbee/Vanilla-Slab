@@ -99,8 +99,8 @@ describe("the span elements that the plugin creates", function() {
     // 0: This is a giant
     // 1: humongous extra 
     // 2: large headline
-    (vanillaSlab.spans[0]).should.equal('This is a giant ');
-    (vanillaSlab.spans[1]).should.equal('humongous extra ');
+    (vanillaSlab.spans[0]).should.equal('This is a giant');
+    (vanillaSlab.spans[1]).should.equal('humongous extra');
     (vanillaSlab.spans[2]).should.equal('large headline');
   });
 });
