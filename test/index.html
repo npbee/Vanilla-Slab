@@ -12,10 +12,15 @@
     </style>
     </head>
   <body>
-    <!--<h1 class="headline">Hello, I am a giant slabtexted headline</h1>-->
     <h1 class="headline">S. Carey</h1>
+    
+    <hr>
+
     <h1 class="headline">This is a huge slabtexted headline with lots of words and stuffs</h1>
     
+    <hr>
+    
+    <h1 class="headline">Hello, I am a giant slabtexted headline</h1>
     <script src="../build/vanilla-slab.build.js"></script>
     <script>
       
@@ -29,12 +34,21 @@
           for (var i = 0; i < vslab.targets.length; i++) {
             var el = vslab.targets[i].element;
             var content = document.createElement('div');
-            var headline_words = document.createElement('h2');
-            headline_words.textContent = 'Words';
-            content.appendChild(headline_words);
 
             var words = document.createElement('pre');
-            words.textContent = vslab.targets[i].words;
+            words.textContent = 'Words:: ';
+            vslab.targets[i].words.forEach(function(word, index) {
+              if (index === 0) {
+                words.textContent += '[ ' + word + ', ';
+              } else if (index === (vslab.targets[i].words.length - 1)) {
+                words.textContent += word + " ]";
+              } else {
+                words.textContent += word + ', ';
+              }
+            });
+
+            var lines = document.createElement('pre');
+            lines.textContent = 'Lines:: ';
 
             content.appendChild(words);
             

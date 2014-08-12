@@ -4,13 +4,36 @@
  * Heavily modified port of this jQuery plugin to vanilla javascript:
  * https://github.com/freqdec/slabText
 ****/
-var VanillaSlab = {};
-
-VanillaSlab.init = _dereq_('./init');
+var VanillaSlab = {
+  init: _dereq_('./init'),
+  slabify: _dereq_('./slabify'),
+  verifyString: _dereq_('./verify-string'),
+  getItemWidth: _dereq_('./get-item-width')
+};
 
 module.exports = VanillaSlab;
 
-},{"./init":2}],2:[function(_dereq_,module,exports){
+},{"./get-item-width":2,"./init":3,"./slabify":4,"./verify-string":5}],2:[function(_dereq_,module,exports){
+ 
+var get_item_width = function(item, font_size) {
+    var f = font_size || '12px arial';
+    var o = document.createElement('div');
+    o.style.position = 'absolute';
+    o.style.float = 'left';
+    o.style.whiteSpace = 'nowrap';
+    o.style.visibility = 'hidden';
+    o.style.fontSize = f;
+    o.innerHTML = item;
+    
+    document.body.appendChild(o);
+    var width = o.offsetWidth;
+    document.body.removeChild(o);
+    return width;
+};
+
+module.exports = get_item_width;
+
+},{}],3:[function(_dereq_,module,exports){
 /****
  * Sets up the plugin
  *    Plugin settings
@@ -19,6 +42,7 @@ module.exports = VanillaSlab;
  * @param {_options} object
  * @return none
 ****/
+var debounce = _dereq_('../utils/debounce');
 
 function init(_options) {
   var options = _options || {};
@@ -54,25 +78,28 @@ function init(_options) {
 
     this.targets.push({
       element: target,
-      words: words
+      words: words,
+      id: target.textContent,
+      lines: ''
     });
 
+    this.slabify(target, words);
+    debounce('resize', this.slabify, 300, true, this, [target, words]);
   }
 
-  this.slabify = _dereq_('./slabify');
-  this.slabify();
+  //this.slabify = require('./slabify');
 
-  //debounce('resize', vanillaSlab.slabify, 300, true, this);
   
 };
 
 module.exports = init;
 
-},{"./slabify":3}],3:[function(_dereq_,module,exports){
-var slabify = function() {
-  var target = this.target;
+},{"../utils/debounce":6}],4:[function(_dereq_,module,exports){
+var slabify = function(target, words) {
+  //var target = this.target;
   var settings = this.settings;
-  var words = this.words;
+  //var words = this.words;
+  console.log(target);
   
   var parent = target.parentNode;
   var parent_width = parent.offsetWidth;  
@@ -92,8 +119,17 @@ var slabify = function() {
   // Get the width of each word and then the ratio of each word to the 
   // total width of the target container
   var strings = [];
-  this.spans = strings;
   
+  // Push the spans to the targets object for reference
+  for (var t = 0; t < this.targets.length; t++) {
+    var targ = this.targets[t];
+    for (var id in targ) {
+      if (targ[id] === target.textContent) {
+        targ.lines = strings;
+      }
+    }
+  }
+
   var current_string = '';
   var working_string = '';
   var chars_per_line = Math.max(this.settings.minCharsPerLine, Math.floor(parent_width / (original_font_size * settings.fontRatio))) || 20;
@@ -147,7 +183,7 @@ var slabify = function() {
   target.innerHTML = '';
   
   for (var s = 0; s < strings.length; s++) {
-    var string_width = this.get_item_width(strings[s], original_font_size);
+    var string_width = this.getItemWidth(strings[s], original_font_size);
     var ratio = (parent_width - buffer) / string_width ;
     var span = document.createElement('span');
     var word_spacing = strings[s].split(' ').length > 1;
@@ -172,6 +208,82 @@ var slabify = function() {
 };
 
 module.exports = slabify;
+
+},{}],5:[function(_dereq_,module,exports){
+/****
+ * Verifies that a string passes the plugin's defined parameters
+ * @param {string} string
+ * @return {boolean}
+****/
+var verifyString = function(string) {
+  var string_word_count = string.trim().split(' ').length;
+  var string_char_count = string.length;
+  
+  return string_word_count >= this.settings.minWordsPerLine &&
+         string_word_count <= this.settings.maxWordsPerLine &&
+         string_char_count <= this.chars_per_line;
+};
+
+module.exports = verifyString;
+
+},{}],6:[function(_dereq_,module,exports){
+function debounce(listener, func, threshold, raf, context, args) {
+  // With request animation frame
+  // Per http://www.html5rocks.com/en/tutorials/speed/animations/
+  function rafDebounce() {
+
+    var requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
+    var ticking = false;
+
+    window.addEventListener(listener, function() {
+      requestTick();
+    });
+
+    function requestTick() {
+      if ( !ticking ) {
+        requestAnimationFrame( update );
+      }
+      ticking = true;
+    }
+
+    function update() {
+      ticking = false;
+      func.apply(context, args);
+    }
+
+  }
+
+
+  // Without request animation frame
+  function otherDebounce() {
+    var timeout;
+    window.addEventListener(listener, function() {
+
+      if ( timeout ) {
+        clearTimeout( timeout );
+      }
+
+      timeout = setTimeout( debounced, threshold || 300 );
+
+    }, false);
+
+    function debounced() {
+      func.apply(context, args);
+    }
+  }
+
+  // Give the option to use request animation frame
+  if ( raf ) {
+    return rafDebounce();
+  } else {
+    return otherDebounce();
+  }
+
+
+}
+
+module.exports = debounce;
+
 
 },{}]},{},[1])
 (1)

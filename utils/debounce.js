@@ -1,4 +1,4 @@
-function debounce(listener, func, threshold, raf, context) {
+function debounce(listener, func, threshold, raf, context, args) {
   // With request animation frame
   // Per http://www.html5rocks.com/en/tutorials/speed/animations/
   function rafDebounce() {
@@ -19,7 +19,7 @@ function debounce(listener, func, threshold, raf, context) {
 
     function update() {
       ticking = false;
-      func.apply(context);
+      func.apply(context, args);
     }
 
   }
@@ -39,7 +39,7 @@ function debounce(listener, func, threshold, raf, context) {
     }, false);
 
     function debounced() {
-      func.apply(context);
+      func.apply(context, args);
     }
   }
 

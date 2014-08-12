@@ -1,7 +1,7 @@
 var chai = require('chai');
 var should = require('should');
 var jsdom = require('jsdom');
-var vanillaSlab = require('../lib/vanilla-slab');
+var vanillaSlab = require('../lib/index');
 
 // Creating a fake dom to test with
 global.window = jsdom.jsdom().createWindow();
@@ -69,10 +69,10 @@ describe('The words in the headline', function() {
   });
 
   it("should be parsed by the plugin into an array", function() {
-    (vanillaSlab.words[0]).should.equal('This');
-    (vanillaSlab.words[1]).should.equal('is');
-    (vanillaSlab.words[2]).should.equal('a');
-    (vanillaSlab.words[3]).should.equal('headline');
+    (vanillaSlab.targets[0].words[0]).should.equal('This');
+    (vanillaSlab.targets[0].words[1]).should.equal('is');
+    (vanillaSlab.targets[0].words[2]).should.equal('a');
+    (vanillaSlab.targets[0].words[3]).should.equal('headline');
   });
 
 });
@@ -99,8 +99,8 @@ describe("the span elements that the plugin creates", function() {
     // 0: This is a giant
     // 1: humongous extra 
     // 2: large headline
-    (vanillaSlab.spans[0]).should.equal('This is a giant');
-    (vanillaSlab.spans[1]).should.equal('humongous extra');
-    (vanillaSlab.spans[2]).should.equal('large headline');
+    (vanillaSlab.targets[0].lines[0]).should.equal('This is a giant');
+    (vanillaSlab.targets[0].lines[1]).should.equal('humongous extra');
+    (vanillaSlab.targets[0].lines[2]).should.equal('large headline');
   });
 });
