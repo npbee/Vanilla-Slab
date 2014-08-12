@@ -1,0 +1,8 @@
+body {
+  font-family: 'Ubuntu';
+  font-weight: 300;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f9f9f9;
+  padding: 30px;
+}
