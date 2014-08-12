@@ -47,7 +47,7 @@ var debounce = _dereq_('../utils/debounce');
 function init(_options) {
   var options = _options || {};
   this.settings = {
-    selector: options.selector || '.headline',
+    selector: options.selector || '.js-vanilla-slab',
     maxFontSize: options.maxFontSize || 2000,
     minWordsPerLine: options.minWordsPerLine || 2,
     maxWordsPerLine: options.maxWordsPerLine || 5,
@@ -99,13 +99,14 @@ var slabify = function(target, words) {
   //var target = this.target;
   var settings = this.settings;
   //var words = this.words;
-  console.log(target);
   
   var parent = target.parentNode;
-  var parent_width = parent.offsetWidth;  
+  var parent_width = parent.offsetWidth - 
+                    (parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-left'), 10) + 
+                     parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-right'), 10));
   var buffer = Math.min( parent_width / settings.buffer);
   
-  
+  console.log(parent_width);
   // Set the display style to 'inline' so that we can get a proper width calc
   //target.style.display = 'inline';
   //var target_width = target.offsetWidth;
@@ -194,12 +195,12 @@ var slabify = function(target, words) {
 
     // Check after setting the font
     var diff = parent_width - span.offsetWidth;
-
+ 
     if (diff > 0) {
       if (word_spacing) {
-        span.style.wordSpacing = (parent_width - span.offsetWidth) / ( (strings[s].split(' ').length - 1).toPrecision(3) );
+        span.style.wordSpacing = diff / ( (strings[s].split(' ').length - 1).toPrecision(3) );
       } else {
-        span.style.letterSpacing = (parent_width - span.offsetWidth) / ( (span.innerHTML.split('').length).toPrecision(3) );
+        span.style.letterSpacing = diff / ( (span.innerHTML.split('').length).toPrecision(3) );
       }
     }
 
