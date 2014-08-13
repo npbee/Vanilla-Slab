@@ -1,14 +1,34 @@
 // Main initialization
 document.addEventListener('DOMContentLoaded', function() {
 
-  var vslab = VanillaSlab;
+  var vslab = new VanillaSlab;
   vslab.init({
     maxWordsPerLine: 3,
     minWordsPerLine: 2,
     fontRatio: 0.86
   });
 
+  var main = new VanillaSlab;
+  main.init({
+    selector: '.js-vanilla-slab-main',
+    maxWordsPerLine: 1,
+    minWordsPerLine: 1,
+    fontRatio: 0.80
+  });
+
   // Debugging only
+  //for (var i = 0; i < main.targets.length; i++) {
+    //var content = document.createElement('div');
+    //var el = main.targets[i].element;
+    //var words = append_stuff(main.targets[i].words, "Words:: ");
+    //var lines = append_stuff(main.targets[i].lines, "Lines:: ");
+
+    //content.appendChild(words);
+    //content.appendChild(lines);
+
+    //el.parentNode.insertBefore(content, el.nextSibling);
+  //}
+
 
   //for (var i = 0; i < vslab.targets.length; i++) {
     //var content = document.createElement('div');
