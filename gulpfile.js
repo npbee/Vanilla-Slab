@@ -11,7 +11,8 @@ gulp.task('scripts', function() {
     standalone: 'VanillaSlab'
   }))
   .pipe(rename('vanilla-slab.build.js'))
-  .pipe(gulp.dest('./build'));
+  .pipe(gulp.dest('./build'))
+  .pipe(gulp.dest('./demo'));
 });
 
 gulp.task('lint', function() {
