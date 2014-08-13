@@ -12,20 +12,21 @@ headline.style.fontSize = '12px';
 global.document.body.appendChild(headline);
 
 describe('Plugin initialization without options', function() {
+  var aSlab;
   before(function(done) {
     headline.innerHTML = 'This is a headline';
-    headline.className = 'headline';
-    vanillaSlab.init();
+    headline.className = 'js-vanilla-slab';
+    aSlab = vanillaSlab;
+    aSlab.init();
     done();
   });
 
   it('should create an instance of the plugin', function() {
-    (vanillaSlab.settings.selector).should.equal('.headline');
-    (vanillaSlab.settings.maxFontSize).should.equal(2000);
-    (vanillaSlab.settings.minWordsPerLine).should.equal(2);
-    (vanillaSlab.settings.maxWordsPerLine).should.equal(5);
-    (vanillaSlab.settings.buffer).should.equal(10);
-    (vanillaSlab.settings.fontRatio).should.equal(0.78);
+    (aSlab.settings.selector).should.equal('.js-vanilla-slab');
+    (aSlab.settings.maxFontSize).should.equal(2000);
+    (aSlab.settings.minWordsPerLine).should.equal(2);
+    (aSlab.settings.maxWordsPerLine).should.equal(5);
+    (aSlab.settings.fontRatio).should.equal(0.95);
   });
 
   after(function(done) {
@@ -34,10 +35,12 @@ describe('Plugin initialization without options', function() {
 });
 
 describe('Plugin initialization with options', function() {
+  var bSlab;
   before(function(done) {
     headline.innerHTML = 'This is a headline';
     headline.className = 'vanilla-slab';
-    vanillaSlab.init({
+    bSlab = vanillaSlab;
+    bSlab.init({
       selector: '.vanilla-slab',
       maxFontSize: 100,
       minWordsPerLine: 3,
@@ -49,30 +52,30 @@ describe('Plugin initialization with options', function() {
   });
 
   it('should create an instance of the plugin with the provided options', function() {
-    (vanillaSlab.settings.selector).should.equal('.vanilla-slab');
-    (vanillaSlab.settings.maxFontSize).should.equal(100);
-    (vanillaSlab.settings.minWordsPerLine).should.equal(3);
-    (vanillaSlab.settings.maxWordsPerLine).should.equal(4);
-    (vanillaSlab.settings.buffer).should.equal(15);
-    (vanillaSlab.settings.fontRatio).should.equal(0.50);
+    (bSlab.settings.selector).should.equal('.vanilla-slab');
+    (bSlab.settings.maxFontSize).should.equal(100);
+    (bSlab.settings.minWordsPerLine).should.equal(3);
+    (bSlab.settings.maxWordsPerLine).should.equal(4);
+    (bSlab.settings.fontRatio).should.equal(0.50);
   });
 });
 
 
 describe('The words in the headline', function() {
-
+  var cSlab;
   before(function(done) {
     headline.innerHTML = 'This is a headline';
-    headline.className = 'headline';
-    vanillaSlab.init();
+    headline.className = 'js-vanilla-slab';
+    cSlab = vanillaSlab;
+    cSlab.init();
     done();
   });
 
   it("should be parsed by the plugin into an array", function() {
-    (vanillaSlab.targets[0].words[0]).should.equal('This');
-    (vanillaSlab.targets[0].words[1]).should.equal('is');
-    (vanillaSlab.targets[0].words[2]).should.equal('a');
-    (vanillaSlab.targets[0].words[3]).should.equal('headline');
+    (cSlab.targets[0].words[0]).should.equal('This');
+    (cSlab.targets[0].words[1]).should.equal('is');
+    (cSlab.targets[0].words[2]).should.equal('a');
+    (cSlab.targets[0].words[3]).should.equal('headline');
   });
 
 });
@@ -81,7 +84,7 @@ describe('The words in the headline', function() {
 describe("the span elements that the plugin creates", function() {
   before(function(done) {
     headline.innerHTML = 'This is a giant humongous extra large headline';
-    headline.className = 'headline';
+    headline.className = 'js-vanilla-slab';
     vanillaSlab.init();
     done();
   });

@@ -6,3 +6,9 @@ body {
   background: #f9f9f9;
   padding: 30px;
 }
+
+pre {
+  font-family: 'Ubuntu Mono';
+  background: yellow;
+  padding: 10px;
+}

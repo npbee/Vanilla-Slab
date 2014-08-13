@@ -4,11 +4,13 @@
  * Heavily modified port of this jQuery plugin to vanilla javascript:
  * https://github.com/freqdec/slabText
 ****/
-var VanillaSlab = {
-  init: _dereq_('./init'),
-  slabify: _dereq_('./slabify'),
-  verifyString: _dereq_('./verify-string'),
-  getItemWidth: _dereq_('./get-item-width')
+var VanillaSlab = function() {
+  return {
+    init: _dereq_('./init'),
+    slabify: _dereq_('./slabify'),
+    verifyString: _dereq_('./verify-string'),
+    getItemWidth: _dereq_('./get-item-width')
+  }
 };
 
 module.exports = VanillaSlab;
