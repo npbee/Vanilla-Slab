@@ -13,6 +13,9 @@ document.onreadystatechange = function() {
       maxWordsPerLine: 3
     });
   }
+
+  // Highlight JS
+  hljs.initHighlightingOnLoad();
 };
 
 

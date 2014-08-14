@@ -251,6 +251,116 @@
 .octicon-zap:before { content: '\26A1'} /* ⚡ */
 
 
+/*
+
+Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fdf6e3;
+  color: #657b83;
+}
+
+.hljs-comment,
+.hljs-template_comment,
+.diff .hljs-header,
+.hljs-doctype,
+.hljs-pi,
+.lisp .hljs-string,
+.hljs-javadoc {
+  color: #93a1a1;
+}
+
+/* Solarized Green */
+.hljs-keyword,
+.hljs-winutils,
+.method,
+.hljs-addition,
+.css .hljs-tag,
+.hljs-request,
+.hljs-status,
+.nginx .hljs-title {
+  color: #859900;
+}
+
+/* Solarized Cyan */
+.hljs-number,
+.hljs-command,
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-rules .hljs-value,
+.hljs-phpdoc,
+.tex .hljs-formula,
+.hljs-regexp,
+.hljs-hexcolor,
+.hljs-link_url {
+  color: #2aa198;
+}
+
+/* Solarized Blue */
+.hljs-title,
+.hljs-localvars,
+.hljs-chunk,
+.hljs-decorator,
+.hljs-built_in,
+.hljs-identifier,
+.vhdl .hljs-literal,
+.hljs-id,
+.css .hljs-function {
+  color: #268bd2;
+}
+
+/* Solarized Yellow */
+.hljs-attribute,
+.hljs-variable,
+.lisp .hljs-body,
+.smalltalk .hljs-number,
+.hljs-constant,
+.hljs-class .hljs-title,
+.hljs-parent,
+.haskell .hljs-type,
+.hljs-link_reference {
+  color: #b58900;
+}
+
+/* Solarized Orange */
+.hljs-preprocessor,
+.hljs-preprocessor .hljs-keyword,
+.hljs-pragma,
+.hljs-shebang,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.diff .hljs-change,
+.hljs-special,
+.hljs-attr_selector,
+.hljs-subst,
+.hljs-cdata,
+.clojure .hljs-title,
+.css .hljs-pseudo,
+.hljs-header {
+  color: #cb4b16;
+}
+
+/* Solarized Red */
+.hljs-deletion,
+.hljs-important {
+  color: #dc322f;
+}
+
+/* Solarized Violet */
+.hljs-link_label {
+  color: #6c71c4;
+}
+
+.tex .hljs-formula {
+  background: #eee8d5;
+}
+
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -310,13 +420,15 @@ body {
   margin: 0 auto;
   background: #fefefe;
   padding: 30px;
+  color: #333;
 }
 
 /* Shared */
 h1, h2, h3, h4, h5, h6,
 header,
 p,
-pre {
+pre,
+.option {
   margin-bottom: 1.5em;
   margin-bottom: 1.5rem;
 }
@@ -327,6 +439,23 @@ a {
    color: #973626;
    font-weight: 400;
  }
+
+strong {
+  font-weight: 700;
+}
+
+
+
+/* SECTIONS */
+section {
+  margin-bottom: 5em;
+  margin-bottom: 5rem;
+}
+  section > h2 {
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+
 /* Headers */
 .js-vanilla-slab,
 .js-main-slab {
@@ -340,21 +469,33 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-h2 { font-size: 2em }
-
-
-pre {
-  font-family: 'Ubuntu Mono';
-  background: #FEFCE3;
-  padding: 10px;
-  line-height: 1.5em;
-  line-height: 1.5rem;
+h2 { 
+  font-size: 2.5em;
+  font-size: 2.5rem;
+  line-height: 1.33;
 }
+h3 { 
+  font-size: 1.75em;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+
+pre,
+code.inline {
+  font-family: 'Ubuntu Mono';
+  /*background: #FEFCE3;*/
+  /*padding: 10px;*/
+  /*line-height: 1.5em;*/
+  /*line-height: 1.5rem;*/
+  border-radius: 3px;
+}
+
 
 /* header */
 header {
   padding-bottom: 20px;
-  border-bottom: 1px solid #d9d9d9;
+  /*border-bottom: 1px solid #d9d9d9;*/
 }
 
 .tagline {
@@ -374,4 +515,13 @@ nav {
     display: inline-block;
     width: 33.33%;
     text-decoration: none;
+  }
+
+
+.option p {
+    margin-bottom: 5px;
+}
+  .option p:nth-child(4) {
+    margin-bottom: 1.5em;
+    margin-bottom: 1.5rem;
   }

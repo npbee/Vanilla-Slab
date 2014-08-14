@@ -7,7 +7,8 @@
   <body>
     <header>
       <h1 class="js-main-slab">VANILLA SLAB</h1>
-      <p class="tagline">A non-jquery, modified clone of the excellent jquery slabtext plugin.</p>
+      <p class="tagline">A (non-jQuery) plugin for creating big, bold, and
+      beautiful headlines.</p>
       <nav>
         <a href="#"><span class="mega-octicon
             octicon-mark-github"></span>Github</a><!--
@@ -17,41 +18,115 @@
       </nav>
     </header>
 
-    <h2>About</h2>
+    <section>
+      <h2>Install</h2>
+      <p>As a node module:</p>
+      <pre><code>$ npm install vanilla-slab</code></pre>
+
+      <p>As a standalone plugin, include the minified or non-minified compiled
+      library:</p>
+      <pre><code>&lt;script src="path/to/plugin/vanilla-slab.min.js"&gt;&lt;/script&gt;
+&lt;script src="myotherscripts"&gt;&lt;/script&gt;
+&lt;/body&gt;
+...</code></pre>
+    </section>
+    
+     
+    <section id="usage">
+      <h2>Usage</h2>
+      <h3>Quick Start</h3>
+      <p>Add a class of 'js-vanilla-slab' to a header on your page.  Then
+      initialize for your preferred installation method:</p>
+      
+      <p>As a standalone plugin:</p>
+      <pre><code>var mySlab = new VanillaSlab;
+mySlab.init();</code></pre>
+
+      <p>As a node module:</p>
+      <pre><code>var VanillaSlab = require('vanilla-slab');
+var mySlab = new VanillaSlab;
+mySlab.init();</code></pre>
+
+      <h3>With Options</h3>
+      <p>As a standalone plugin:</p>
+      <pre><code>var mySlab = new VanillaSlab;
+mySlab.init({
+  selector: '.my-selector',
+  minWordsPerLine: 4,
+  ...
+});</code></pre>
+
+      <p>As a node module:</p>
+      <pre><code>var VanillaSlab = require('vanilla-slab');
+var mySlab = new VanillaSlab;
+mySlab.init({
+  selector: '.my-selector',
+  minWordsPerline: 4,
+  ...,
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>Options</h2>
+
+      <div class="option">
+        <h3>Selector</h3>
+        <p>Key: <code class="inline">selector</code></p>
+        <p>Type: <code class="inline">String</code></p>
+        <p>Default: <code class="inline">.js-vanilla-slab</code></p>
+        <p>This should be a valid css selector for the class that is applied to
+        the headline you want to affect.</p>
+      </div>
+      
+      <div class="option">
+        <h3>Max Font Size</h3>
+        <p>Key:  <code class="inline">maxFontSize</code></p>
+      </section>
         
-    <h2>Default usage:</h2>
-    <p>Add a class of 'js-vanilla-slab' to a header on your page.  Then initiate
-    like this: </p>
-    <pre>var mySlab = VanillaSlab;
-mySlab.init();</pre>
+    </section>
 
-    <h2>With Options:</h2>
-    <p>Add your own class and initialize with options:</p>
-    <pre>VanillaSlab.init({
-    selector: '.my-class', 
-    maxWordsPerLine: 4,
-    minWordsPerLine: 2,...
-});</pre>
-    
-    <h1 class="js-vanilla-slab">Small Title</h1>
-    
-    <hr>
+    <section>
+      <h2>About</h2>
+      <p>This plugin is a port of this excellent jQuery plugin:
+      <a
+        href="https://github.com/freqDec/slabText/">https://github.com/freqDec/slabText/</a>.  It's been interpreted and heavliy
+      modified for my own devices, but retains a lot of the same concepts as
+      freqDec's plugin.</p>
 
-    <h1 class="js-vanilla-slab">A Bigger Title</h1>
-    
-    <hr>
+      <p>It takes a headline string and determines the ideal amount of characters per line
+      based on the available width.  It then attempts to build up individual
+      strings within that headline based on specified parameters.</p>
 
-    <h1 class="js-vanilla-slab">An Even Bigger Title Still</h1>
-    
-    <hr>
-    
-    <h1 class="js-vanilla-slab">Look Here, This is the Biggest Title Yet</h1>
+      <p><strong>Disclaimer:  </strong>This plugin fluctuates depending on your
+      chosen font face.  It can take some experimentation to find the right combo
+      of paramters to get the correct effect.</p>
 
-    <hr>
-    
-    <h1 class="js-vanilla-slab">Nope, this is the biggest, baddest, most hugest headline yet full of so many important words and stuff.</h1>
+    </section>
+
+    <section>
+      <h2>Examples</h2>
+      <h1 class="js-vanilla-slab">Small Title</h1>
+
+      <hr>
+
+      <h1 class="js-vanilla-slab">A Bigger Title</h1>
+
+      <hr>
+
+      <h1 class="js-vanilla-slab">An Even Bigger Title Still</h1>
+
+      <hr>
+
+      <h1 class="js-vanilla-slab">Look Here, This is the Biggest Title Yet</h1>
+
+      <hr>
+
+      <h1 class="js-vanilla-slab">Nope, this is the biggest, baddest, most hugest headline yet full of so many important words and stuff.</h1>
+
+    </section>
 
     <script src="./vanilla-slab.build.js"></script>
+    <script src="./assets/js/highlight.pack.js"></script>
     <script src="./demo.js"></script>
   </body>
 </html>
