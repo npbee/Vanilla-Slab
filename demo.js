@@ -10,7 +10,6 @@ document.onreadystatechange = function() {
     
     var vslab = new VanillaSlab;
     vslab.init({
-      fontRatio: 1,
       maxWordsPerLine: 3
     });
   }
