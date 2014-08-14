@@ -5,27 +5,39 @@
     <link rel="stylesheet" href="./demo.css">
   </head>
   <body>
-    <h1 class="js-vanilla-slab">VANILLA SLAB</h1>
-    <p>A non-jquery, modified clone of the excellent jquery slabtext plugin.</p>
-    <hr>
+    <header>
+      <h1 class="js-main-slab">VANILLA SLAB</h1>
+      <p class="tagline">A non-jquery, modified clone of the excellent jquery slabtext plugin.</p>
+      <nav>
+        <a href="#"><span class="mega-octicon
+            octicon-mark-github"></span>Github</a><!--
+        --><a href="#"><span class="mega-octicon
+            octicon-cloud-download"></span>Download</a><!--
+        --><a href="#"><span class="mega-octicon octicon-code"></span>Usage</a>
+      </nav>
+    </header>
+
+    <h2>Features</h2>
+    <h3>No jQuery</h3>
+    <p>We all love jQuery, but it's not necessary for all projects.  This plugin
+    can be used without jQuery.</p>
+
+    <h3>Responsive</h3>
+    <p>Works on screens of all sizes.</p>
     
     <h2>Default usage:</h2>
     <p>Add a class of 'js-vanilla-slab' to a header on your page.  Then initiate
     like this: </p>
-    <pre>
-      VanillaSlab.init();
-    </pre>
+    <pre>var mySlab = VanillaSlab;
+mySlab.init();</pre>
 
     <h2>With Options:</h2>
     <p>Add your own class and initialize with options:</p>
-    <pre>
-      VanillaSlab.init({
-        selector: '.my-class',
-        maxWordsPerLine: 4,
-        minWordsPerLine: 2,
-        ...
-      });
-    </pre>
+    <pre>VanillaSlab.init({
+    selector: '.my-class', 
+    maxWordsPerLine: 4,
+    minWordsPerLine: 2,...
+});</pre>
     
     <h1 class="js-vanilla-slab">Small Title</h1>
     

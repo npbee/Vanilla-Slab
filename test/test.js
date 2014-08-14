@@ -16,7 +16,7 @@ describe('Plugin initialization without options', function() {
   before(function(done) {
     headline.innerHTML = 'This is a headline';
     headline.className = 'js-vanilla-slab';
-    aSlab = vanillaSlab;
+    aSlab = new vanillaSlab;
     aSlab.init();
     done();
   });
@@ -39,7 +39,7 @@ describe('Plugin initialization with options', function() {
   before(function(done) {
     headline.innerHTML = 'This is a headline';
     headline.className = 'vanilla-slab';
-    bSlab = vanillaSlab;
+    bSlab = new vanillaSlab;
     bSlab.init({
       selector: '.vanilla-slab',
       maxFontSize: 100,
@@ -66,7 +66,7 @@ describe('The words in the headline', function() {
   before(function(done) {
     headline.innerHTML = 'This is a headline';
     headline.className = 'js-vanilla-slab';
-    cSlab = vanillaSlab;
+    cSlab = new vanillaSlab;
     cSlab.init();
     done();
   });
@@ -82,10 +82,12 @@ describe('The words in the headline', function() {
 
 
 describe("the span elements that the plugin creates", function() {
+  var dSlab;
   before(function(done) {
     headline.innerHTML = 'This is a giant humongous extra large headline';
     headline.className = 'js-vanilla-slab';
-    vanillaSlab.init();
+    dSlab = new vanillaSlab;
+    dSlab.init();
     done();
   });
 
@@ -102,8 +104,8 @@ describe("the span elements that the plugin creates", function() {
     // 0: This is a giant
     // 1: humongous extra 
     // 2: large headline
-    (vanillaSlab.targets[0].lines[0]).should.equal('This is a giant');
-    (vanillaSlab.targets[0].lines[1]).should.equal('humongous extra');
-    (vanillaSlab.targets[0].lines[2]).should.equal('large headline');
+    (dSlab.targets[0].lines[0]).should.equal('This is a giant');
+    (dSlab.targets[0].lines[1]).should.equal('humongous extra');
+    (dSlab.targets[0].lines[2]).should.equal('large headline');
   });
 });
