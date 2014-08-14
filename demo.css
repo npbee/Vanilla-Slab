@@ -304,6 +304,8 @@ table {
 body {
   font-family: 'Ubuntu';
   font-weight: 300;
+  font-size: 20px;
+  line-height: 30px;
   max-width: 900px;
   margin: 0 auto;
   background: #fefefe;
