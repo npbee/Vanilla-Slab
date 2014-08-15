@@ -12,7 +12,7 @@ $ npm install vanilla-slab
 As a standalone plugin, include the minified or non-minified compiled library:
 
 ```html
-<script src="path/to/plugin/vanilla-slab.min.js"&gt;&lt;/script&gt;
+<script src="path/to/plugin/vanilla-slab.min.js"></script>
 <script src="myotherscripts"></script>
 </body>
 ...
@@ -67,14 +67,18 @@ Options
 ----
 ###Selector
 Key: `selector`
+
 Type: `String`
+
 Default: `.js-vanilla-slab`
         
 This should be a valid css selector for the class that is applied to the headline you want to affect.
       
 ###Max Font Size
 Key:  `maxFontSize`
+
 Type: `Integer`
+
 Default: `300`
         
 The maximum font size you want your headlines to be.
@@ -82,28 +86,36 @@ The maximum font size you want your headlines to be.
 
 ###Min Words Per Line
 Key:  `minWordsPerLine`
+
 Type: `Integer`
+
 Default: `2`
 
 The minimum amount of words you want to allow per line.  Depening on the target headline, this may be overridden in the last line.
 
 ###Max Words Per Line
 Key:  `maxWordsPerLine`
+
 Type: `Integer`
+
 Default: `5`
 
 The maximum amount of words you want to allow per line.  Depening on the target headline, this may be overridden in the last line.
 
 ###Min Chars Per Line
 Key:  `minCharsPerLine`
+
 Type: `Integer`
+
 Default: `20`
         
 The minimum amount of characters you want per line.
 
 ###Font Ratio
 Key:  `fontRatio`
+
 Type: `Float`
+
 Default: `0.95`
         
 This is a bit of a magic number.  It's used to calculate the ideal number of characters per line.  Generally you want it to be a two-digit number less than 1.  This is the setting that you will need to experiment with for the best results with your chosen font.
