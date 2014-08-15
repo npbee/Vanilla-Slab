@@ -10,11 +10,11 @@
       <p class="tagline">A (non-jQuery) plugin for creating big, bold, and
       beautiful headlines.</p>
       <nav>
-        <a href="#"><span class="mega-octicon
+        <a href="https://github.com/npbee/Vanilla-Slab"><span class="mega-octicon
             octicon-mark-github"></span>Github</a><!--
         --><a href="#"><span class="mega-octicon
             octicon-cloud-download"></span>Download</a><!--
-        --><a href="#"><span class="mega-octicon octicon-code"></span>Usage</a>
+        --><a href="#usage"><span class="mega-octicon octicon-code"></span>Usage</a>
       </nav>
     </header>
 
@@ -81,9 +81,49 @@ mySlab.init({
       <div class="option">
         <h3>Max Font Size</h3>
         <p>Key:  <code class="inline">maxFontSize</code></p>
-      </section>
+        <p>Type: <code class="inline">Integer</code></p>
+        <p>Default: <code class="inline">300</code></p>
+        <p>The maximum font size you want your headlines to be.</p>
+      </div>
+
+      <div class="option">
+        <h3>Min Words Per Line</h3>
+        <p>Key:  <code class="inline">minWordsPerLine</code></p>
+        <p>Type: <code class="inline">Integer</code></p>
+        <p>Default: <code class="inline">2</code></p>
+        <p>The minimum amount of words you want to allow per line.  Depening on
+        the target headline, this may be overridden in the last line.</p>
+      </div>
         
+      <div class="option">
+        <h3>Max Words Per Line</h3>
+        <p>Key:  <code class="inline">maxWordsPerLine</code></p>
+        <p>Type: <code class="inline">Integer</code></p>
+        <p>Default: <code class="inline">5</code></p>
+        <p>The maximum amount of words you want to allow per line.  Depening on
+        the target headline, this may be overridden in the last line.</p>
+      </div>
+
+      <div class="option">
+        <h3>Min Chars Per Line</h3>
+        <p>Key:  <code class="inline">minCharsPerLine</code></p>
+        <p>Type: <code class="inline">Integer</code></p>
+        <p>Default: <code class="inline">20</code></p>
+        <p>The minimum amount of characters you want per line.</p>
+      </div>
+
+      <div class="option">
+        <h3>Font Ratio</h3>
+        <p>Key:  <code class="inline">fontRatio</code></p>
+        <p>Type: <code class="inline">Float</code></p>
+        <p>Default: <code class="inline">0.95</code></p>
+        <p>This is a bit of a magic number.  It's used to calculate the ideal
+        number of characters per line.  Generally you want it to be a two-digit
+        number less than 1.  This is the setting that you will need to
+        experiment with for the best results with your chosen font.</p>
+      </div>
     </section>
+
 
     <section>
       <h2>About</h2>
@@ -101,6 +141,14 @@ mySlab.init({
       chosen font face.  It can take some experimentation to find the right combo
       of paramters to get the correct effect.</p>
 
+    </section>
+
+    <section>
+      <h2>Gulpfile</h2>
+      <p>This plugin uses gulp for build tasks.  To concatenate and compile the
+      scripts, run <code class='inline'>gulp</code>.  To run the tests, run
+      <code class='inline'>gulp test</code>.  To build the minified standalone,
+      run <code class='inline'>gulp build</code>.
     </section>
 
     <section>
