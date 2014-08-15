@@ -484,11 +484,16 @@ h3 {
 pre,
 code.inline {
   font-family: 'Ubuntu Mono';
-  /*background: #FEFCE3;*/
+  background: #FDF6E3;
   /*padding: 10px;*/
   /*line-height: 1.5em;*/
   /*line-height: 1.5rem;*/
   border-radius: 3px;
+}
+
+code.inline {
+  padding: 5px;
+  border: 1px solid #d9d9d9;
 }
 
 

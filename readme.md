@@ -1,24 +1,4 @@
-<html>
-  <head>
-    <title>Non-jQuery Slabtext</title>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:300,400,700|Sigmar+One' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="./demo.css">
-  </head>
-  <body>
-    <header>
-      <h1 class="js-main-slab">VANILLA SLAB</h1>
-      <p class="tagline">A (non-jQuery) plugin for creating big, bold, and
-      beautiful headlines.</p>
-      <nav>
-        <a href="https://github.com/npbee/Vanilla-Slab"><span class="mega-octicon
-            octicon-mark-github"></span>Github</a><!--
-        --><a href="#"><span class="mega-octicon
-            octicon-cloud-download"></span>Download</a><!--
-        --><a href="#usage"><span class="mega-octicon octicon-code"></span>Usage</a>
-      </nav>
-    </header>
-
-    <section>
+ <section>
       <h2>Install</h2>
       <p>As a node module:</p>
       <pre><code>$ npm install vanilla-slab</code></pre>
@@ -124,57 +104,3 @@ mySlab.init({
       </div>
     </section>
 
-
-    <section>
-      <h2>About</h2>
-      <p>This plugin is a port of this excellent jQuery plugin:
-      <a
-        href="https://github.com/freqDec/slabText/">https://github.com/freqDec/slabText/</a>.  It's been interpreted and heavliy
-      modified for my own devices, but retains a lot of the same concepts as
-      freqDec's plugin.</p>
-
-      <p>It takes a headline string and determines the ideal amount of characters per line
-      based on the available width.  It then attempts to build up individual
-      strings within that headline based on specified parameters.</p>
-
-      <p><strong>Disclaimer:  </strong>This plugin fluctuates depending on your
-      chosen font face.  It can take some experimentation to find the right combo
-      of paramters to get the correct effect.</p>
-
-    </section>
-
-    <section>
-      <h2>Gulpfile</h2>
-      <p>This plugin uses gulp for build tasks.  To concatenate and compile the
-      scripts, run <code class='inline'>gulp</code>.  To run the tests, run
-      <code class='inline'>gulp test</code>.  To build the minified standalone,
-      run <code class='inline'>gulp build</code>.
-    </section>
-
-    <section>
-      <h2>Examples</h2>
-      <h1 class="js-vanilla-slab">Small Title</h1>
-
-      <hr>
-
-      <h1 class="js-vanilla-slab">A Bigger Title</h1>
-
-      <hr>
-
-      <h1 class="js-vanilla-slab">An Even Bigger Title Still</h1>
-
-      <hr>
-
-      <h1 class="js-vanilla-slab">Look Here, This is the Biggest Title Yet</h1>
-
-      <hr>
-
-      <h1 class="js-vanilla-slab">Nope, this is the biggest, baddest, most hugest headline yet full of so many important words and stuff.</h1>
-
-    </section>
-
-    <script src="./vanilla-slab.build.js"></script>
-    <script src="./assets/js/highlight.pack.js"></script>
-    <script src="./demo.js"></script>
-  </body>
-</html>

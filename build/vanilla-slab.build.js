@@ -50,7 +50,7 @@ function init(_options) {
   var options = _options || {};
   this.settings = {
     selector: options.selector || '.js-vanilla-slab',
-    maxFontSize: options.maxFontSize || 2000,
+    maxFontSize: options.maxFontSize || 300,
     minWordsPerLine: options.minWordsPerLine || 2,
     maxWordsPerLine: options.maxWordsPerLine || 5,
     minCharsPerLine: options.minCharsPerLine || 20,
@@ -97,19 +97,16 @@ module.exports = init;
 
 },{"../utils/debounce":6}],4:[function(_dereq_,module,exports){
 var slabify = function(target, words) {
-  //var target = this.target;
   var settings = this.settings;
-  //var words = this.words;
-  
   var parent = target.parentNode;
+
   var parent_width = parent.offsetWidth - 
                     (parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-left'), 10) + 
                      parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-right'), 10));
   var buffer = Math.min( parent_width / settings.buffer);
   
-  // Set the display style to 'inline' so that we can get a proper width calc
-  //target.style.display = 'inline';
-  //var target_width = target.offsetWidth;
+  // Set the line height on the target element in case any CSS overrides are in
+  // place.
   target.style.lineHeight = 1;
 
   // Get font sizes
@@ -118,8 +115,6 @@ var slabify = function(target, words) {
       target.currentStyle.fontSize, 10);
 
 
-  // Get the width of each word and then the ratio of each word to the 
-  // total width of the target container
   var strings = [];
   
   // Push the spans to the targets object for reference
@@ -142,6 +137,7 @@ var slabify = function(target, words) {
 
     // the working string is current string + the next word in the words array
     working_string = current_string + words[w] + ' ';
+    
     // Verify both the working string and the current string
     var a = this.verifyString(current_string);
     var b = this.verifyString(working_string);
@@ -168,7 +164,7 @@ var slabify = function(target, words) {
     else if (!last_elem && a && !b) {
       // Push the current string do the array
       strings.push(current_string.trim());
-      // Reset the string
+      // Reset the string and add in the current word
       current_string = '' + words[w] + ' ';
     }
     
@@ -181,7 +177,6 @@ var slabify = function(target, words) {
     } else {
       strings.push(working_string.trim())
      } 
-    //console.log(working_string + ' :: ' + this.verifyString(working_string));
 
   }
 
@@ -189,35 +184,21 @@ var slabify = function(target, words) {
   target.innerHTML = '';
   
   for (var s = 0; s < strings.length; s++) {
-    //var string_width = this.getItemWidth(strings[s], original_font_size);
-    //var ratio = (parent_width / string_width) * this.settings.fontRatio;
     var span = document.createElement('span');
-    //var word_spacing = strings[s].split(' ').length > 1;
+    var word_spacing = strings[s].split(' ').length > 1;
     
     span.innerHTML = strings[s];
-    //span.style.fontSize = (original_font_size * ratio).toPrecision(3);
     target.appendChild(span);
 
     setFont(span, this.settings);
-    // Check after setting the font
-    //var diff = parent_width - span.offsetWidth;
-    
-    //if (diff > 0) {
-      //if (word_spacing) {
-        //span.style.wordSpacing = diff / ( (strings[s].split(' ').length - 1).toPrecision(3) );
-      //} else {
-        //span.style.letterSpacing = diff / ( (span.innerHTML.split('').length).toPrecision(3) );
-      //}
-    //}
 
-    span.style.display = 'block';
   }
 
   function setFont(elm, settings) {
     var elm_width = elm.offsetWidth;
     var ratio = (parent_width / elm_width) * settings.fontRatio;
     var word_spacing = strings[s].split(' ').length > 1;
-    elm.style.fontSize = (original_font_size * ratio).toPrecision(3);
+    elm.style.fontSize = Math.min(settings.maxFontSize, (original_font_size * ratio).toPrecision(3));
 
     var diff = parent_width - span.offsetWidth;
     if (diff > 0) {
@@ -227,7 +208,9 @@ var slabify = function(target, words) {
         span.style.letterSpacing = diff / ( (span.innerHTML.split('').length).toPrecision(3) );
       }
     }
+    elm.style.display = 'block';
   }
+  
 };
 
 module.exports = slabify;
