@@ -104,3 +104,30 @@ mySlab.init({
       </div>
     </section>
 
+ <section>
+      <h2>About</h2>
+      <p>This plugin is a port of this excellent jQuery plugin:
+      <a
+        href="https://github.com/freqDec/slabText/">https://github.com/freqDec/slabText/</a>.  It's been interpreted and heavliy
+      modified for my own devices, but retains a lot of the same concepts as
+      freqDec's plugin.</p>
+
+      <p>It takes a headline string and determines the ideal amount of characters per line
+      based on the available width.  It then attempts to build up individual
+      strings within that headline based on specified parameters.</p>
+
+      <p><strong>Disclaimer:  </strong>This plugin fluctuates depending on your
+      chosen font face.  It can take some experimentation to find the right combo
+      of paramters to get the correct effect.</p>
+
+    </section>
+
+    <section>
+      <h2>Gulpfile</h2>
+      <p>This plugin uses gulp for build tasks.  To concatenate and compile the
+      scripts, run <code class='inline'>gulp</code>.  To run the tests, run
+      <code class='inline'>gulp test</code>.  To build the minified standalone,
+      run <code class='inline'>gulp build</code>.
+    </section>
+
+
