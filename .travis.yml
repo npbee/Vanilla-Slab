@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "0.10"
 before_instal:
-  - sudo apt-get install fontconfig
+  - npm install -g karma-phantomjs-launcher
   - npm install -g gulp
 script:
   - gulp test_ci
