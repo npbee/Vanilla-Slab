@@ -17,6 +17,16 @@ var karmaCommonConf = {
   ]
 };
 
+var karmaCommonConf_ci = {
+  browsers: ['PhantomJS', 'Firefox'],
+  frameworks: ['mocha', 'chai', 'chai-as-promised'],
+  singleRun: true,
+  files: [
+    'build/*.js',
+    'test/test.js'
+  ]
+};
+
 gulp.task('scripts', function() {
   gulp.src('./lib/index.js')
   .pipe(browserify({
@@ -36,5 +46,10 @@ gulp.task('lint', function() {
 gulp.task('test', function(done) {
   karma.start(karmaCommonConf, done);
 });
+
+gulp.task('test_ci', function(done) {
+  karma.start(karmaCommonConf_ci, done);
+});
+
 
 gulp.task('default', ['lint', 'scripts']);

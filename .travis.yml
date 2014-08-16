@@ -4,4 +4,4 @@ node_js:
 before_instal:
   - npm install -g gulp
 script:
-  - gulp test
+  - gulp test_ci
