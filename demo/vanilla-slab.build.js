@@ -97,6 +97,10 @@ module.exports = init;
 
 },{"../utils/debounce":6}],4:[function(_dereq_,module,exports){
 var slabify = function(target, words) {
+  var _target = target;
+  var _words = words;
+  var self = this;
+  
   var settings = this.settings;
   var parent = target.parentNode;
 
@@ -189,41 +193,51 @@ var slabify = function(target, words) {
   
   for (var s = 0; s < strings.length; s++) {
     var span = document.createElement('span');
-
     span.innerHTML = strings[s];
     target.appendChild(span);
     setFont(span, this.settings);
-  
   }
 
   function setFont(elm, settings) {
+    elm.style.fontSize = original_font_size;
+    elm.style.wordSpacing = 1;
+    elm.style.letterSpacing = 1;
+    
     var elm_width = elm.offsetWidth;
     var ratio = (parent_width / elm_width) * settings.fontRatio;
     var word_spacing = elm.textContent.split(' ').length > 1;
     
     elm.style.fontSize = Math.round(Math.min(settings.maxFontSize, (original_font_size * ratio).toPrecision(3)));
     
+    elm.style.display = 'inline';
     var diff = parent_width - elm.offsetWidth;
     if (diff > 0) {
       if (word_spacing) {
-        var spacing =  Math.floor((diff / ( (strings[s].split(' ').length - 1))) * settings.fontRatio);
+        var spacing =  Math.floor((diff / ( (elm.textContent.split(' ').length - 1))) * settings.fontRatio);
         var rounded_spacing = (Math.round(spacing / 10) * 10);
-        span.style.wordSpacing = spacing;
+        elm.style.wordSpacing = spacing;
       } else {
-        span.style.letterSpacing = diff / ( (span.innerHTML.split('').length).toPrecision(3) );
+        elm.style.letterSpacing = diff / ( (elm.innerHTML.split('').length).toPrecision(3) );
       }
-    } 
-    // If diff is less than 0, that means the span is wider than parent.  Likely
-    // that it calculated the width before the web font was loaded and we need
-    // to recalc
-    else if (diff < 0) {
-      console.log('true');
-      setFont(elm, settings);
     }
+
+    setTimeout(function() {
+      checkWidth(elm, settings);
+    }, 400);
 
     elm.style.display = 'block';
   }
-  
+
+  function checkWidth(elm, settings) {
+    elm.style.display = 'inline';
+    elm.style.whiteSpace = 'nowrap';
+    if (elm.offsetWidth > elm.parentNode.offsetWidth) {
+      setFont(elm, settings);
+    }
+    elm.style.display = 'block';
+    elm.style.whiteSpace = 'normal';
+  }
+
 };
 
 module.exports = slabify;

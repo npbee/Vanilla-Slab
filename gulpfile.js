@@ -10,6 +10,7 @@ var karma = require('karma').server;
 var karmaCommonConf = {
   browsers: ['Chrome', 'Safari'],
   frameworks: ['mocha', 'chai', 'chai-as-promised'],
+  singleRun: true,
   files: [
     'build/*.js',
     'test/test.js'
