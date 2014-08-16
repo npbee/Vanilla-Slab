@@ -1,6 +1,6 @@
 Vanilla Slab
 ====
-
+[![Build Status](https://travis-ci.org/npbee/Vanilla-Slab.svg?branch=master)](https://travis-ci.org/npbee/Vanilla-Slab)
 Install
 ----
 As a node module:
