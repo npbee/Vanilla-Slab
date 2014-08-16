@@ -3,7 +3,6 @@ node_js:
   - "0.10"
 before_instal:
   - npm install -g karma-phantomjs-launcher
-  - npm install -g karma-firefox-launcher
   - npm install -g gulp
 script:
   - gulp test_ci
