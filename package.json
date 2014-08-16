@@ -4,7 +4,7 @@
   "description": "A heavily modified port of the excellent jQuery Slabtext plugin, without jQuery.",
   "main": "index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "author": "Nick Ball <nick@npbee.me> (http://npbee.me/)",
   "license": "ISC",
