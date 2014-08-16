@@ -105,6 +105,7 @@ var slabify = function(target, words) {
                      parseInt(window.getComputedStyle(parent, null).getPropertyValue('padding-right'), 10));
   var buffer = Math.min( parent_width / settings.buffer);
   
+  this.parent = parent;
   
   // Set the line height on the target element in case any CSS overrides are in
   // place.
@@ -130,8 +131,10 @@ var slabify = function(target, words) {
 
   var current_string = '';
   var working_string = '';
-  var chars_per_line = Math.max(this.settings.minCharsPerLine, Math.floor(parent_width / (original_font_size * settings.fontRatio))) || 20;
+  var chars_per_line = Math.max(this.settings.minCharsPerLine, Math.floor(parent_width / (original_font_size * settings.fontRatio)));
   this.chars_per_line = chars_per_line;
+  
+  this.chars_per_line_debug = "Max of " + this.settings.minCharsPerLine + " AND Floor of ( " + parent_width + " / ( " + original_font_size + " * " + settings.fontRatio + " ) ) == " + chars_per_line;
   
   for (var w = 0; w < words.length; w++) {
     var last_elem = w === words.length - 1;
