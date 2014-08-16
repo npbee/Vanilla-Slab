@@ -18,7 +18,7 @@ var karmaCommonConf = {
 };
 
 var karmaCommonConf_ci = {
-  browsers: ['PhantomJS']
+  browsers: ['PhantomJS'],
   frameworks: ['mocha', 'chai', 'chai-as-promised'],
   singleRun: true,
   files: [
