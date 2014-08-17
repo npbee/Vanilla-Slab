@@ -8,7 +8,7 @@ var stylish = require('jshint-stylish');
 var karma = require('karma').server;
 
 var karmaCommonConf = {
-  browsers: ['Chrome', 'Safari'],
+  browsers: ['Chrome', 'Safari', 'Firefox'],
   frameworks: ['mocha', 'chai', 'chai-as-promised'],
   singleRun: true,
   files: [

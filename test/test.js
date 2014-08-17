@@ -90,6 +90,12 @@ describe("the span elements created when the parent is 900px", function() {
     (dSlab.targets[0].lines[0]).should.equal('This might possibly be the');
     (dSlab.targets[0].lines[1]).should.equal('biggest headline that ever existed');
   });
+
+  it('should not wrap the text', function() {
+      headline.children[0].style.display = 'inline';
+      headline.children[0].style.whiteSpace = 'nowrap';
+      (headline.children[0].offsetWidth).should.be.below(headline.children[0].parentNode.offsetWidth);
+  });
 });
 
 
@@ -112,7 +118,6 @@ describe("the span elements that the plugin creates when the parent is 300px", f
     // Chars per line
     // Max(minCharsPerLine, (parent_width / font_size * fontRatio)
     // Max(20, (300 / (12 * 0.95)) == 26
-    console.log(eSlab.chars_per_line_debug);
     (eSlab.targets[0].lines[0]).should.equal('This might possibly be');
     (eSlab.targets[0].lines[1]).should.equal('the biggest headline that');
     (eSlab.targets[0].lines[2]).should.equal('ever existed');
