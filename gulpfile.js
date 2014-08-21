@@ -35,7 +35,7 @@ gulp.task('scripts', function() {
   .pipe(rename('vanilla-slab.build.js'))
   .pipe(gulp.dest('./build'))
   .pipe(gulp.dest('./demo'));
-});
+}); 
 
 gulp.task('lint', function() {
   return gulp.src('./lib/vanilla-slab.js')
