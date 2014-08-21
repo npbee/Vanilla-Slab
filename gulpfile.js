@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var rename = require('gulp-rename');
 var jshint = require('gulp-jshint');
-
+var uglify = require('gulp-uglify');
 var stylish = require('jshint-stylish');
 //var mocha = require('gulp-mocha');
 var karma = require('karma').server;
@@ -43,6 +43,15 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
+gulp.task('uglify', function() {
+  gulp.src('build/vanilla-slab.build.js')
+  .pipe(uglify({
+   }))
+  .pipe(rename('vanilla-slab.build.min.js'))
+  .pipe(gulp.dest('./build'))
+  .pipe(gulp.dest('./demo'));
+});
+
 gulp.task('test', function(done) {
   karma.start(karmaCommonConf, done);
 });
@@ -53,3 +62,4 @@ gulp.task('test_ci', function(done) {
 
 
 gulp.task('default', ['lint', 'scripts']);
+gulp.task('build', ['lint', 'scripts', 'uglify']);
