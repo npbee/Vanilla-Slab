@@ -8,11 +8,12 @@ document.onreadystatechange = function() {
       minWordsPerLine: 1,
       postTweak: false
     });
-    
+
     var vslab = new VanillaSlab;
     vslab.init({
       maxWordsPerLine: 3,
-      fontRatio: 0.97
+      fontRatio: 0.97,
+      postTweak: false
     });
   }
 

@@ -48,6 +48,7 @@ var debounce = _dereq_('../utils/debounce');
 
 function init(_options) {
   var options = _options || {};
+  
   this.settings = {
     selector: options.selector || '.js-vanilla-slab',
     maxFontSize: options.maxFontSize || 300,
@@ -56,7 +57,7 @@ function init(_options) {
     minCharsPerLine: options.minCharsPerLine || 20,
     fontRatio: options.fontRatio || 0.95,
     raf: options.raf || true,
-    postTweak: options.postTweak || true
+    postTweak: options.postTweak === false ? false : true
   };
 
   // Check if the selector given exists on the page
@@ -98,8 +99,8 @@ module.exports = init;
 },{"../utils/debounce":7}],4:[function(_dereq_,module,exports){
 function setFont(elm, settings, starting_font_size) {
   elm.style.fontSize = starting_font_size;
-  elm.style.wordSpacing = 1;
-  elm.style.letterSpacing = 1;
+  elm.style.wordSpacing = 'normal';
+  elm.style.letterSpacing = 'normal';
   
   var parent_width = elm.parentNode.offsetWidth;
   var elm_width = elm.offsetWidth;
@@ -248,7 +249,6 @@ var slabify = function(target, words) {
 
   // Remove the original content
   target.innerHTML = '';
-  
   for (var s = 0; s < strings.length; s++) {
     var span = document.createElement('span');
     span.innerHTML = strings[s];
