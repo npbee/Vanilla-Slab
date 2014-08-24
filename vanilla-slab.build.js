@@ -55,7 +55,11 @@ function init(_options) {
     maxWordsPerLine: options.maxWordsPerLine || 5,
     minCharsPerLine: options.minCharsPerLine || 20,
     fontRatio: options.fontRatio || 0.95,
+<<<<<<< HEAD
     raf: options.raf || true
+=======
+    postTweak: options.postTweak || true
+>>>>>>> add initial postweak option
   };
 
   // Check if the selector given exists on the page
@@ -108,8 +112,10 @@ function setFont(elm, settings, starting_font_size) {
   elm.style.fontSize = Math.round(Math.min(settings.maxFontSize, (starting_font_size * ratio).toPrecision(3)));
 
   elm.style.display = 'inline';
+
+  // Post tweaking
   var diff = parent_width - elm.offsetWidth;
-  if (diff > 0) {
+  if (diff > 0 && settings.postTweak) {
     if (word_spacing) {
       var spacing =  Math.floor((diff / ( (elm.textContent.split(' ').length - 1))) * settings.fontRatio);
       var rounded_spacing = (Math.round(spacing / 10) * 10);
