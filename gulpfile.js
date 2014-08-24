@@ -7,6 +7,8 @@ var stylish = require('jshint-stylish');
 //var mocha = require('gulp-mocha');
 var karma = require('karma').server;
 
+var webserver = require('gulp-webserver');
+
 var karmaCommonConf = {
   browsers: ['Chrome', 'Safari', 'Firefox'],
   frameworks: ['mocha', 'chai', 'chai-as-promised'],
@@ -58,6 +60,12 @@ gulp.task('test', function(done) {
 
 gulp.task('test_ci', function(done) {
   karma.start(karmaCommonConf_ci, done);
+});
+
+gulp.task('serve', function() {
+  gulp.src('demo')
+  .pipe(webserver({
+  }));
 });
 
 
