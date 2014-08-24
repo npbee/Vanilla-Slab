@@ -6,7 +6,7 @@ document.onreadystatechange = function() {
       selector: '.js-main-slab',
       maxWordsPerLine: 1,
       minWordsPerLine: 1,
-      fontRatio: 1
+      postTweak: false
     });
     
     var vslab = new VanillaSlab;
