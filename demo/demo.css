@@ -421,6 +421,8 @@ body {
   background: #fefefe;
   padding: 30px;
   color: #333;
+  border-right: 1px solid #d9d9d9;
+  border-left: 1px solid #d9d9d9;
 }
 
 /* Shared */
