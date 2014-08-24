@@ -55,11 +55,8 @@ function init(_options) {
     maxWordsPerLine: options.maxWordsPerLine || 5,
     minCharsPerLine: options.minCharsPerLine || 20,
     fontRatio: options.fontRatio || 0.95,
-<<<<<<< HEAD
-    raf: options.raf || true
-=======
+    raf: options.raf || true,
     postTweak: options.postTweak || true
->>>>>>> add initial postweak option
   };
 
   // Check if the selector given exists on the page
