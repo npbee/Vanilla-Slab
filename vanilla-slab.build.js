@@ -98,21 +98,30 @@ module.exports = init;
 
 },{"../utils/debounce":7}],4:[function(_dereq_,module,exports){
 function setFont(elm, settings, starting_font_size) {
+  console.log(
+      "parent width: " + elm.parentNode.offsetWidth,
+      "element width: " + elm.offsetWidth,
+      "starting font size: " + starting_font_size
+  );
+  
   elm.style.fontSize = starting_font_size;
   elm.style.wordSpacing = 'normal';
   elm.style.letterSpacing = 'normal';
+  elm.style.display = 'inline';
   
   var parent_width = elm.parentNode.offsetWidth;
   var elm_width = elm.offsetWidth;
-  var ratio = (parent_width / elm_width) * settings.fontRatio;
+  
+  var ratio = parent_width / elm_width;
+
   var word_spacing = elm.textContent.split(' ').length > 1;
+  var new_font_size = starting_font_size * ratio * settings.fontRatio;
 
-  elm.style.fontSize = Math.round(Math.min(settings.maxFontSize, (starting_font_size * ratio).toPrecision(3)));
-
-  elm.style.display = 'inline';
-
+  elm.style.fontSize = Math.min(settings.maxFontSize, new_font_size);
+  
   // Post tweaking
   var diff = parent_width - elm.offsetWidth;
+  
   if (diff > 0 && settings.postTweak) {
     if (word_spacing) {
       var spacing =  Math.floor((diff / ( (elm.textContent.split(' ').length - 1))) * settings.fontRatio);
@@ -246,7 +255,7 @@ var slabify = function(target, words) {
      } 
 
   }
-
+  
   // Remove the original content
   target.innerHTML = '';
   for (var s = 0; s < strings.length; s++) {

@@ -6,14 +6,14 @@ document.onreadystatechange = function() {
       selector: '.js-main-slab',
       maxWordsPerLine: 1,
       minWordsPerLine: 1,
-      postTweak: false
+      postTweak: true
     });
 
     var vslab = new VanillaSlab;
     vslab.init({
       maxWordsPerLine: 3,
       fontRatio: 0.97,
-      postTweak: false
+      postTweak: true
     });
   }
 
