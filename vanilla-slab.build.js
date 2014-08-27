@@ -55,7 +55,7 @@ function init(_options) {
     minWordsPerLine: options.minWordsPerLine || 2,
     maxWordsPerLine: options.maxWordsPerLine || 5,
     minCharsPerLine: options.minCharsPerLine || 20,
-    fontRatio: options.fontRatio || 0.95,
+    buffer: options.buffer || 0.95,
     raf: options.raf || true,
     postTweak: options.postTweak === false ? false : true
   };
@@ -98,11 +98,6 @@ module.exports = init;
 
 },{"../utils/debounce":7}],4:[function(_dereq_,module,exports){
 function setFont(elm, settings, starting_font_size) {
-  console.log(
-      "parent width: " + elm.parentNode.offsetWidth,
-      "element width: " + elm.offsetWidth,
-      "starting font size: " + starting_font_size
-  );
   
   elm.style.fontSize = starting_font_size;
   elm.style.wordSpacing = 'normal';
@@ -111,20 +106,18 @@ function setFont(elm, settings, starting_font_size) {
   
   var parent_width = elm.parentNode.offsetWidth;
   var elm_width = elm.offsetWidth;
-  
   var ratio = parent_width / elm_width;
-
-  var word_spacing = elm.textContent.split(' ').length > 1;
-  var new_font_size = starting_font_size * ratio * settings.fontRatio;
+  var new_font_size = starting_font_size * ratio * settings.buffer;
 
   elm.style.fontSize = Math.min(settings.maxFontSize, new_font_size);
   
   // Post tweaking
+  var word_spacing = elm.textContent.split(' ').length > 1;
   var diff = parent_width - elm.offsetWidth;
   
   if (diff > 0 && settings.postTweak) {
     if (word_spacing) {
-      var spacing =  Math.floor((diff / ( (elm.textContent.split(' ').length - 1))) * settings.fontRatio);
+      var spacing =  Math.floor((diff / ( (elm.textContent.split(' ').length - 1))) * settings.buffer);
       var rounded_spacing = (Math.round(spacing / 10) * 10);
       elm.style.wordSpacing = spacing;
     } else {
@@ -202,7 +195,7 @@ var slabify = function(target, words) {
   var working_string = '';
   var chars_per_line = Math.max(this.settings.minCharsPerLine, 
                                 Math.floor(parent_width / 
-                                          (this.original_font_size * settings.fontRatio)
+                                          (this.original_font_size * settings.buffer)
                                           )
                                 );
   this.chars_per_line = chars_per_line;
