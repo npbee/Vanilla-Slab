@@ -1,6 +1,6 @@
 {
   "name": "vanilla-slab",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A heavily modified port of the excellent jQuery Slabtext plugin, without jQuery.",
   "main": "lib/index",
   "scripts": {
