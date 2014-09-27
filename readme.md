@@ -91,7 +91,7 @@ Type: `Integer`
 
 Default: `2`
 
-The minimum amount of words you want to allow per line.  Depening on the target headline, this may be overridden in the last line.
+The minimum amount of words you want to allow per line.  Depending on the target headline, this may be overridden in the last line.
 
 ###Max Words Per Line
 Key:  `maxWordsPerLine`
@@ -100,7 +100,7 @@ Type: `Integer`
 
 Default: `5`
 
-The maximum amount of words you want to allow per line.  Depening on the target headline, this may be overridden in the last line.
+The maximum amount of words you want to allow per line.  Depending on the target headline, this may be overridden in the last line.
 
 ###Min Chars Per Line
 Key:  `minCharsPerLine`
@@ -119,6 +119,15 @@ Type: `Float`
 Default: `0.95`
         
 This is a bit of a magic number.  It's used to calculate the ideal number of characters per line.  Generally you want it to be a two-digit number less than 1.  This is the setting that you will need to experiment with for the best results with your chosen font.
+
+###Delayed Check
+Key:  `delayCheck`
+
+Type: `Boolean`
+
+Default: `false`
+        
+Occasionally when dealing with a web font the code will execute before the web font has downloaded, resulting in incorrect calculations and a poor display.  Dealing with webfont loaders is tricky, so as a simple hack, set the `delayCheck` to `true` to have the script check to make sure the headline does not exceed the parent width.  If it does, the script will recalculate.
 
 
 About
