@@ -57,7 +57,8 @@ function init(_options) {
     minCharsPerLine: options.minCharsPerLine || 20,
     buffer: options.buffer || 0.95,
     raf: options.raf || true,
-    postTweak: options.postTweak === false ? false : true
+    postTweak: options.postTweak === false ? false : true,
+    delayCheck: options.postCheck || false
   };
 
   // Check if the selector given exists on the page
@@ -126,9 +127,11 @@ function setFont(elm, settings, starting_font_size) {
     }
   }
 
-  setTimeout(function() {
-    checkWidth(elm, settings, starting_font_size, parent_width);
-  }, 300);
+  if (settings.postCheck) {
+    setTimeout(function() {
+      checkWidth(elm, settings, starting_font_size, parent_width);
+    }, 300);
+  }
 
   elm.style.display = 'block';
 }
