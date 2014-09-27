@@ -128,6 +128,20 @@ mySlab.init({
         <p>Default:  <code class="inline">true</code></p>
         <p>When debouncing the plugin on screen resizes, set to <code class="inline">true</code> to use "Request Animation Frame" instead of a timout.  Using RAF is a little smoother and more progressive, but supported in fewer browsers.</p>
       </div>
+      <div class="option">
+        <h3>Delayed Check</h3>
+        <p>Key:  <code class="inline">delayCheck</code></p>
+        <p>Type: <code class="inline">Boolean</code></p>
+        <p>Default:  <code class="inline">false</code></p>
+        <p>Occasionally when dealing with a web font the code will execute
+        before the web font has downloaded, resulting in incorrect calculations
+        and a poor display.  Dealing with webfont loaders is tricky, so as a
+        simple hack, set the <code class="inline">delayCheck</code> to <code
+        class="inline">true</code> to have the script check to make sure the
+      headline does not exceed the parent width.  If it does, the script will
+      recalculate.</p>
+      </div>
+
     </section>
 
 

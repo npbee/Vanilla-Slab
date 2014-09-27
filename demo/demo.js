@@ -7,8 +7,7 @@ document.onreadystatechange = function() {
       maxWordsPerLine: 1,
       minWordsPerLine: 1,
       postTweak: true,
-      buffer: 1.0,
-      delayCheck: true
+      buffer: 1.0
     });
 
     var vslab = new VanillaSlab;

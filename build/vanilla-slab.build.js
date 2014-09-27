@@ -106,7 +106,10 @@ function setFont(elm, settings, starting_font_size) {
   elm.style.letterSpacing = 'normal';
   elm.style.display = 'inline';
   
-  var parent_width = elm.parentNode.offsetWidth;
+  var elm_parent = elm.parentNode;
+  elm_parent.style.float = 'none';
+
+  var parent_width = elm_parent.offsetWidth;
   var elm_width = elm.offsetWidth;
   var ratio = parent_width / elm_width;
   var new_font_size = starting_font_size * ratio * settings.buffer;
